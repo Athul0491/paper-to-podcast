@@ -1,34 +1,62 @@
 # Paper-to-Podcast 🎤
 
-**Paper-to-Podcast** is a tool that transforms academic research papers into an engaging and conversational podcast format. With this project, listeners can absorb the content of a research paper in a lively discussion involving three distinct personas—perfect for those who prefer listening over reading, especially during commutes or travel.
+**Paper-to-Podcast** turns academic research papers into an engaging, three-person podcast conversation. Instead of a flat text‑to‑speech readout, it generates a structured discussion between distinct personas so listeners can absorb complex material **hands‑free** (e.g., during commutes or workouts).
 
-## Project Overview
+---
 
-### Objective
-This app simulates a three-person discussion around the content of a research paper, making complex information more accessible and enjoyable to absorb. Instead of merely reading aloud, it converts papers into conversations that are engaging and intuitive, providing valuable insights and critical thinking.
+## Objective
 
-### Personas
-- **Host**: Guides the conversation, introducing each section and explaining the main points in an engaging and warm tone.
-- **Learner**: Asks intuitive questions and brings curiosity to the discussion, helping listeners grasp core concepts.
-- **Expert**: Provides in-depth knowledge and additional details, enhancing the discussion with profound insights.
+The goal is to make dense research **accessible and enjoyable** by simulating a natural conversation around the paper:
 
-This structure fosters an interactive listening experience, helping users better understand the paper in a way that feels natural and human.
+- Distills key sections into plain language
+- Surfaces intuitive questions and clarifications
+- Adds expert context and critical thinking
+- Delivers the result as a multi‑speaker audio track
 
-### Code Structure and Key Components
-- **Planning Chain**: Starts by creating a detailed plan for each section of the paper. Planning helps the model stay on track, reducing the chances of hallucinations or redundancy.
-- **Discussion Chain**: Uses a retrieval-augmented generation model to expand on each section. This ensures the script stays true to the source content while generating meaningful dialogue.
-- **Enhancement Chain**: Finalizes the script by removing redundancies, refining transitions, and ensuring a smooth flow.
-- **Text-to-Speech**: The generated script is then converted into audio using the OpenAI API, producing realistic voices for each persona.
+---
 
-### Cost Efficiency
-The app is cost-effective, utilizing OpenAI's API. For example, generating a 9-minute podcast from a 19-page research paper costs approximately $0.16.
+## Personas
+
+- **Host** – Guides the episode, introduces sections, and keeps the tone warm and engaging.  
+- **Learner** – Asks intuitive questions and expresses confusion to surface explanations.  
+- **Expert** – Provides deeper technical insight, connections, and implications.
+
+This persona design creates a more “human” listening experience than a single‑voice summary.
+
+---
+
+## Architecture & Key Components
+
+- **Planning Chain**  
+  Builds a section‑by‑section outline of the conversation from the paper. This keeps the model on track and reduces hallucinations and repetition.
+
+- **Discussion Chain (RAG)**  
+  Uses **retrieval‑augmented generation** to ground each segment in the original paper, expanding the outline into a detailed, persona‑driven script.
+
+- **Enhancement Chain**  
+  Cleans up redundancies, smooths transitions, and enforces a coherent, episode‑like flow.
+
+- **Text-to-Speech**  
+  Uses the **OpenAI API** to turn the final script into audio, assigning different voices to each persona for a true multi‑speaker effect.
+
+---
+
+## Cost Efficiency
+
+The pipeline is optimized for low inference cost.  
+Example: generating a ~9‑minute podcast from a 19‑page paper costs **≈$0.16** with the current OpenAI configuration.
+
+---
+
+## Getting Started
 
 ### Prerequisites
-1. Ensure you have a valid OpenAI API key stored in your `.env` file.
 
-### Running the App
-argument:
-   ```bash
-   streamlit run app.py
-   ```
+- Python 3.8+  
+- OpenAI API key (stored in `.env` as `OPENAI_API_KEY`)  
+- Streamlit for the UI
 
+### Run the App
+
+```bash
+streamlit run app.py
